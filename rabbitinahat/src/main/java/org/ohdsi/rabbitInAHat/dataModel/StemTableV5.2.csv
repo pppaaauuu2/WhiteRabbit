@@ -9,12 +9,12 @@ STEM_TABLE,SOURCE_VALUE,YES,CHARACTER VARYING,The source code for the Concept as
 STEM_TABLE,SOURCE_CONCEPT_ID,YES,INTEGER,A foreign key to a Concept that refers to the code used in the source.
 STEM_TABLE,TYPE_CONCEPT_ID,NO,INTEGER,"A foreign key to the predefined Concept identifier in the Standardized Vocabularies reflecting the source data from which the event was recorded, the level of standardization, and the type of occurrence."
 STEM_TABLE,START_DATE,NO,DATE,The start date of the event.
+STEM_TABLE,START_DATETIME,YES,DATETIME,The start datetime of the event.
 STEM_TABLE,END_DATE,YES,DATE,The end date of the event.
-STEM_TABLE,START_TIME,YES,TIME,The (start) time of the event.
+STEM_TABLE,END_DATETIME,YES,DATETIME,The end datetime of the event.
+STEM_TABLE,VERBATIM_END_DATE,YES,DATE,The verbatim end date (not derived) of the event.
 STEM_TABLE,DAYS_SUPPLY,YES,INTEGER,The number of days of supply of the medication as recorded in the original prescription or dispensing record.
-STEM_TABLE,DOSE_UNIT_CONCEPT_ID,YES,INTEGER,A foreign key to a predefined concept in the Standardized Vocabularies reflecting the unit the effective_drug_dose value is expressed.
 STEM_TABLE,DOSE_UNIT_SOURCE_VALUE,YES,CHARACTER VARYING,The information about the dose unit as detailed in the source.
-STEM_TABLE,EFFECTIVE_DRUG_DOSE,YES,FLOAT,Numerical value of Drug dose for this Drug Exposure record.
 STEM_TABLE,LOT_NUMBER,YES,CHARACTER VARYING,An identifier assigned to a particular quantity or lot of Drug product from the manufacturer.
 STEM_TABLE,MODIFIER_CONCEPT_ID,YES,INTEGER,A foreign key to a Standard Concept identifier for a modifier to the Procedure (e.g. bilateral)
 STEM_TABLE,OPERATOR_CONCEPT_ID,YES,INTEGER,"A foreign key identifier to the predefined Concept in the Standardized Vocabularies reflecting the mathematical operator that is applied to the value_as_number. Operators are <, ?, =, ?, >."
@@ -40,3 +40,5 @@ STEM_TABLE,DISEASE_STATUS_CONCEPT_ID,YES,INTEGER,A foreign key to a Standard Con
 STEM_TABLE,SPECIMEN_SOURCE_ID,YES,INTEGER,The Specimen identifier as it appears in the source data.
 STEM_TABLE,ANATOMIC_SITE_SOURCE_VALUE,YES,CHARACTER VARYING,The information about the anatomic site as detailed in the source.
 STEM_TABLE,DISEASE_STATUS_SOURCE_VALUE,YES,CHARACTER VARYING,The information about the disease status as detailed in the source.
+,CONDITION_STATUS_CONCEPT_ID,YES,CHARACTER VARYING,A foreign key to the predefined Concept identifier in the Standardized Vocabularies reflecting the condition_status.
+,CONDITION_STATUS_SOURCE_VALUE,YES,INTEGER,The source code as it appears in the source data

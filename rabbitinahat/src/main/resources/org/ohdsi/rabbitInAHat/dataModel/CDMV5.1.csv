@@ -19,7 +19,7 @@ PERSON,LOCATION_ID,YES,INTEGER,"A foreign key to the place of residency for the 
 PERSON,PROVIDER_ID,YES,INTEGER,A foreign key to the primary care provider the person is seeing in the provider table.
 PERSON,CARE_SITE_ID,YES,INTEGER,"A foreign key to the site of primary care in the care_site table, where the details of the care site are stored."
 PERSON,PERSON_SOURCE_VALUE,YES,CHARACTER VARYING,An (encrypted) key derived from the person identifier in the source data. This is necessary when a use case requires a link back to the person data at the source dataset.
-PERSON,GENDER_SOURCE_VALUE,YES,CHARACTER VARYING,The source code for the gender of the person as it appears in the source data. The personÕs gender is mapped to a standard gender concept in the Standardized Vocabularies; the original value is stored here for reference.
+PERSON,GENDER_SOURCE_VALUE,YES,CHARACTER VARYING,The source code for the gender of the person as it appears in the source data. The personï¿½s gender is mapped to a standard gender concept in the Standardized Vocabularies; the original value is stored here for reference.
 PERSON,GENDER_SOURCE_CONCEPT_ID,YES,INTEGER,A foreign key to the gender concept that refers to the code used in the source.
 PERSON,RACE_SOURCE_VALUE,YES,CHARACTER VARYING,The source code for the race of the person as it appears in the source data. The person race is mapped to a standard race concept in the Standardized Vocabularies and the original value is stored here for reference.
 PERSON,RACE_SOURCE_CONCEPT_ID,YES,INTEGER,A foreign key to the race concept that refers to the code used in the source.
@@ -95,7 +95,7 @@ DRUG_EXPOSURE,STOP_REASON,YES,CHARACTER VARYING,"The reason the Drug was stopped
 DRUG_EXPOSURE,REFILLS,YES,INTEGER,"The number of refills after the initial prescription. The initial prescription is not counted, values start with 0."
 DRUG_EXPOSURE,QUANTITY,YES,NUMERIC,The quantity of drug as recorded in the original prescription or dispensing record.
 DRUG_EXPOSURE,DAYS_SUPPLY,YES,INTEGER,The number of days of supply of the medication as recorded in the original prescription or dispensing record.
-DRUG_EXPOSURE,SIG,YES,TEXT,The directions (ÒsigneturÓ) on the Drug prescription as recorded in the original prescription (and printed on the container) or dispensing record.
+DRUG_EXPOSURE,SIG,YES,TEXT,The directions (ï¿½signeturï¿½) on the Drug prescription as recorded in the original prescription (and printed on the container) or dispensing record.
 DRUG_EXPOSURE,ROUTE_CONCEPT_ID,YES,INTEGER,A foreign key to a predefined concept in the Standardized Vocabularies reflecting the route of administration.
 DRUG_EXPOSURE,EFFECTIVE_DRUG_DOSE,YES,NUMERIC,Numerical value of Drug dose for this Drug Exposure record.
 DRUG_EXPOSURE,DOSE_UNIT_CONCEPT_ID,YES,INTEGER,A foreign key to a predefined concept in the Standardized Vocabularies reflecting the unit the effective_drug_dose value is expressed.
@@ -227,8 +227,8 @@ CDM_SOURCE,CDM_SOURCE_NAME,NO,CHARACTER VARYING,The full name of the source
 CDM_SOURCE,CDM_SOURCE_ABBREVIATION,YES,CHARACTER VARYING,An abbreviation of the name
 CDM_SOURCE,CDM_HOLDER,YES,CHARACTER VARYING,The name of the organization responsible for the development of the CDM instance
 CDM_SOURCE,SOURCE_DESCRIPTION,YES,TEXT,A description of the source data origin and purpose for collection. The description may contain a summary of the period of time that is expected to be covered by this dataset.
-CDM_SOURCE,SOURCE_DOCUMENTATION_REFERENCE,YES,CHARACTER VARYING,URLÊor other external reference to location of source documentation
-CDM_SOURCE,CDM_ETL_REFERENCE,YES,CHARACTER VARYING,URLÊor other external reference to location of ETL specification documentation and ETL source code
+CDM_SOURCE,SOURCE_DOCUMENTATION_REFERENCE,YES,CHARACTER VARYING,URLï¿½or other external reference to location of source documentation
+CDM_SOURCE,CDM_ETL_REFERENCE,YES,CHARACTER VARYING,URLï¿½or other external reference to location of ETL specification documentation and ETL source code
 CDM_SOURCE,SOURCE_RELEASE_DATE,YES,DATE,"The date for which the source data are most current, such as the last day of data capture"
 CDM_SOURCE,CDM_RELEASE_DATE,YES,DATE,The date when the CDM was instantiated
 CDM_SOURCE,CDM_VERSION,YES,CHARACTER VARYING,The version of CDM used
@@ -244,11 +244,11 @@ COHORT_DEFINITION,DEFINITION_TYPE_CONCEPT_ID,NO,INTEGER,Type defining what kind 
 COHORT_DEFINITION,COHORT_DEFINITION_SYNTAX,YES,TEXT,Syntax or code to operationalize the Cohort definition
 COHORT_DEFINITION,SUBJECT_CONCEPT_ID,NO,INTEGER,"A foreign key to the Concept to which defines the domain of subjects that are members of the cohort (e.g., Person, Provider, Visit)."
 COHORT_DEFINITION,COHORT_INSTANTIATION_DATE,YES,DATE,A date to indicate when the Cohort was instantiated in the COHORT table
-COHORT_ATTRIBUTE,COHORT_DEFINITION_ID,NO,INTEGER,A foreign key to a record in theÊCOHORT_DEFINITIONÊtable containing relevant Cohort Definition information.
+COHORT_ATTRIBUTE,COHORT_DEFINITION_ID,NO,INTEGER,A foreign key to a record in theï¿½COHORT_DEFINITIONï¿½table containing relevant Cohort Definition information.
 COHORT_ATTRIBUTE,COHORT_START_DATE,NO,DATE,"The date when the Cohort Definition criteria for the Person, Provider or Visit first match."
 COHORT_ATTRIBUTE,COHORT_END_DATE,NO,DATE,"The date when the Cohort Definition criteria for the Person, Provider or Visit no longer match or the Cohort membership was terminated."
 COHORT_ATTRIBUTE,SUBJECT_ID,NO,INTEGER,"A foreign key to the subject in the Cohort. These could be referring to records in the PERSON, PROVIDER, VISIT_OCCURRENCE table."
-COHORT_ATTRIBUTE,ATTRIBUTE_DEFINITION_ID,NO,INTEGER,A foreign key to a record in theÊATTRIBUTE_DEFINITIONtable containing relevant Attribute Definition information.
+COHORT_ATTRIBUTE,ATTRIBUTE_DEFINITION_ID,NO,INTEGER,A foreign key to a record in theï¿½ATTRIBUTE_DEFINITIONtable containing relevant Attribute Definition information.
 COHORT_ATTRIBUTE,VALUE_AS_NUMBER,YES,NUMERIC,The attribute result stored as a number. This is applicable to attributes where the result is expressed as a numeric value.
 COHORT_ATTRIBUTE,VALUE_AS_CONCEPT_ID,YES,INTEGER,The attribute result stored as a Concept ID. This is applicable to attributes where the result is expressed as a categorical value.
 ATTRIBUTE_DEFINITION,ATTRIBUTE_DEFINITION_ID,NO,INTEGER,A unique identifier for each Attribute.

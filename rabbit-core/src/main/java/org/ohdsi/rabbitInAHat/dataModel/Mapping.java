@@ -32,7 +32,9 @@ public class Mapping<T extends MappableItem> {
 	}
 
 	public void addSourceToTargetMap(MappableItem sourceItem, MappableItem targetItem) {
-		sourceToCdmMaps.add(new ItemToItemMap(sourceItem, targetItem));
+            if(sourceItem != null && targetItem != null){
+                sourceToCdmMaps.add(new ItemToItemMap(sourceItem, targetItem));
+            }
 	}
 
 	public void addSourceToTargetMap(ItemToItemMap itemToItemMap) {
@@ -102,10 +104,14 @@ public class Mapping<T extends MappableItem> {
 	}
 
 	public ItemToItemMap getSourceToTargetMap(MappableItem sourceItem, MappableItem targetItem) {
-		for (ItemToItemMap sourceToTargetMap : sourceToCdmMaps) {
+		try{
+                    for (ItemToItemMap sourceToTargetMap : sourceToCdmMaps) {
 			if (sourceToTargetMap.getSourceItem().equals(sourceItem) && sourceToTargetMap.getTargetItem().equals(targetItem))
 				return sourceToTargetMap;
 		}
+                }catch(NullPointerException e){
+                    return null;
+                }
 		return null;
 	}
 

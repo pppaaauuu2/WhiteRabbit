@@ -17,6 +17,12 @@
 
     <repositories>
         <repository>
+            <id>local-maven-repo</id>
+            <name>Local Repository</name>
+            <layout>default</layout>
+            <url>file:///${project.basedir}\lib</url>
+        </repository>
+        <repository>
             <id>central</id>
             <name>Central Repository</name>
             <url>https://repo.maven.apache.org/maven2</url>
@@ -28,7 +34,7 @@
         <repository>
             <id>clojars</id>
             <name>Clojars Repository</name>
-            <url>http://clojars.org/repo/</url>
+            <url>https://clojars.org/repo/</url>
             <layout>default</layout>
             <snapshots>
                 <enabled>false</enabled>
@@ -52,21 +58,17 @@
                 <enabled>false</enabled>
             </snapshots>
         </repository>
-        <repository>
+        
+        
+<!--        <repository>
             <id>jahia</id>
             <name>Geomajas Repository</name>
-            <url>http://maven.geomajas.org/</url>
+            <url>https://maven.geomajas.org/</url>
             <layout>default</layout>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </repository>
-        <repository>
-            <id>local-maven-repo</id>
-            <name>Local Repository</name>
-            <layout>default</layout>
-            <url>file:///${project.basedir}/../lib</url>
-        </repository>
+        </repository>-->
     </repositories>
 
     <pluginRepositories>
@@ -141,4 +143,11 @@
             </resource>
         </resources>
     </build>
+    <dependencies>
+        <dependency>
+            <groupId>local</groupId>
+            <artifactId>ojdbc14</artifactId>
+            <version>10.2.0.1.0</version>
+        </dependency>
+    </dependencies>
 </project>

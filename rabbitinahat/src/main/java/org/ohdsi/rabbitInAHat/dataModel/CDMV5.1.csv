@@ -12,7 +12,7 @@ PERSON,GENDER_CONCEPT_ID,NO,INTEGER,A foreign key that refers to an identifier i
 PERSON,YEAR_OF_BIRTH,NO,INTEGER,"The year of birth of the person. For data sources with date of birth, the year is extracted. For data sources where the year of birth is not available, the approximate year of birth is derived based on any age group categorization available."
 PERSON,MONTH_OF_BIRTH,YES,INTEGER,"The month of birth of the person. For data sources that provide the precise date of birth, the month is extracted and stored in this field."
 PERSON,DAY_OF_BIRTH,YES,INTEGER,"The day of the month of birth of the person. For data sources that provide the precise date of birth, the day is extracted and stored in this field."
-PERSON,TIME_OF_BIRTH,YES,CHARACTER VARYING,The time of birth at the birth day
+PERSON,BIRTH_DATETIME,YES,DATETIME,The time of birth at the birth day
 PERSON,RACE_CONCEPT_ID,NO,INTEGER,A foreign key that refers to an identifier in the CONCEPT table for the unique race of the person.
 PERSON,ETHNICITY_CONCEPT_ID,NO,INTEGER,A foreign key that refers to the standard concept identifier in the Standardized Vocabularies for the ethnicity of the person.
 PERSON,LOCATION_ID,YES,INTEGER,"A foreign key to the place of residency for the person in the location table, where the detailed address information is stored."
@@ -28,7 +28,9 @@ PERSON,ETHNICITY_SOURCE_CONCEPT_ID,YES,INTEGER,A foreign key to the ethnicity co
 OBSERVATION_PERIOD,OBSERVATION_PERIOD_ID,NO,INTEGER,A unique identifier for each observation period.
 OBSERVATION_PERIOD,PERSON_ID,NO,INTEGER,A foreign key identifier to the person for whom the observation period is defined. The demographic details of that person are stored in the person table.
 OBSERVATION_PERIOD,OBSERVATION_PERIOD_START_DATE,NO,DATE,The start date of the observation period for which data are available from the data source.
+OBSERVATION_PERIOD,OBSERVATION_PERIOD_START_DATETIME,NO,DATETIME,The start time of the observation period for which data are available from the data source.
 OBSERVATION_PERIOD,OBSERVATION_PERIOD_END_DATE,NO,DATE,The end date of the observation period for which data are available from the data source.
+OBSERVATION_PERIOD,OBSERVATION_PERIOD_END_DATETIME,NO,DATETIME,The end time of the observation period for which data are available from the data source.
 OBSERVATION_PERIOD,PERIOD_TYPE_CONCEPT_ID,NO,INTEGER,A foreign key identifier to the predefined concept in the Standardized Vocabularies reflecting the source of the observation period information
 CARE_SITE,CARE_SITE_ID,NO,INTEGER,A unique identifier for each Care Site.
 CARE_SITE,CARE_SITE_NAME,YES,CHARACTER VARYING,The description or name of the Care Site
@@ -40,9 +42,9 @@ VISIT_OCCURRENCE,VISIT_OCCURRENCE_ID,NO,INTEGER,A unique identifier for each Per
 VISIT_OCCURRENCE,PERSON_ID,NO,INTEGER,A foreign key identifier to the Person for whom the visit is recorded. The demographic details of that Person are stored in the PERSON table.
 VISIT_OCCURRENCE,VISIT_CONCEPT_ID,NO,INTEGER,A foreign key that refers to a visit Concept identifier in the Standardized Vocabularies.
 VISIT_OCCURRENCE,VISIT_START_DATE,NO,DATE,The start date of the visit.
-VISIT_OCCURRENCE,VISIT_START_TIME,YES,CHARACTER VARYING,The time the visit started.
+VISIT_OCCURRENCE,VISIT_START_DATETIME,YES,DATETIME,The time the visit started.
 VISIT_OCCURRENCE,VISIT_END_DATE,NO,DATE,The end date of the visit. If this is a one-day visit the end date should match the start date.
-VISIT_OCCURRENCE,VISIT_END_TIME,YES,CHARACTER VARYING,The time the visit ended.
+VISIT_OCCURRENCE,VISIT_END_DATETIME,YES,DATETIME,The time the visit ended.
 VISIT_OCCURRENCE,VISIT_TYPE_CONCEPT_ID,NO,INTEGER,A foreign key to the predefined Concept identifier in the Standardized Vocabularies reflecting the type of source data from which the visit record is derived.
 VISIT_OCCURRENCE,PROVIDER_ID,YES,INTEGER,A foreign key to the provider in the provider table who was associated with the visit.
 VISIT_OCCURRENCE,CARE_SITE_ID,YES,INTEGER,A foreign key to the care site in the care site table that was visited.
@@ -65,7 +67,9 @@ CONDITION_OCCURRENCE,CONDITION_OCCURRENCE_ID,NO,INTEGER,A unique identifier for 
 CONDITION_OCCURRENCE,PERSON_ID,NO,INTEGER,A foreign key identifier to the Person who is experiencing the condition. The demographic details of that Person are stored in the PERSON table.
 CONDITION_OCCURRENCE,CONDITION_CONCEPT_ID,NO,INTEGER,A foreign key that refers to a Standard Condition Concept identifier in the Standardized Vocabularies.
 CONDITION_OCCURRENCE,CONDITION_START_DATE,NO,DATE,The date when the instance of the Condition is recorded.
+CONDITION_OCCURRENCE,CONDITION_START_DATETIME,NO,DATETIME,The time when the instance of the Condition is recorded.
 CONDITION_OCCURRENCE,CONDITION_END_DATE,YES,DATE,The date when the instance of the Condition is considered to have ended.
+CONDITION_OCCURRENCE,CONDITION_END_DATETIME,YES,DATETIME,The time when the instance of the Condition is considered to have ended.
 CONDITION_OCCURRENCE,CONDITION_TYPE_CONCEPT_ID,NO,INTEGER,"A foreign key to the predefined Concept identifier in the Standardized Vocabularies reflecting the source data from which the condition was recorded, the level of standardization, and the type of occurrence."
 CONDITION_OCCURRENCE,STOP_REASON,YES,CHARACTER VARYING,"The reason that the condition was no longer present, as indicated in the source data."
 CONDITION_OCCURRENCE,PROVIDER_ID,YES,INTEGER,A foreign key to the Provider in the PROVIDER table who was responsible for capturing (diagnosing) the Condition.
@@ -74,6 +78,7 @@ CONDITION_OCCURRENCE,CONDITION_SOURCE_VALUE,YES,CHARACTER VARYING,The source cod
 CONDITION_OCCURRENCE,CONDITION_SOURCE_CONCEPT_ID,YES,INTEGER,A foreign key to a Condition Concept that refers to the code used in the source.
 DEATH,PERSON_ID,NO,INTEGER,A foreign key identifier to the deceased person. The demographic details of that person are stored in the person table.
 DEATH,DEATH_DATE,NO,DATE,"The date the person was deceased. If the precise date including day or month is not known or not allowed, December is used as the default month, and the last day of the month the default day."
+DEATH,DEATH_DATETIME,YES,DATETIME,The time the person was deceased.
 DEATH,DEATH_TYPE_CONCEPT_ID,NO,INTEGER,A foreign key referring to the predefined concept identifier in the Standardized Vocabularies reflecting how the death was represented in the source data.
 DEATH,CAUSE_CONCEPT_ID,YES,INTEGER,A foreign key referring to a standard concept identifier in the Standardized Vocabularies for conditions.
 DEATH,CAUSE_SOURCE_VALUE,YES,CHARACTER VARYING,"The source code for the cause of death as it appears in the source data. This code is mapped to a standard concept in the Standardized Vocabularies and the original code is, stored here for reference."
@@ -82,7 +87,9 @@ DRUG_EXPOSURE,DRUG_EXPOSURE_ID,NO,INTEGER,A system-generated unique identifier f
 DRUG_EXPOSURE,PERSON_ID,NO,INTEGER,A foreign key identifier to the person who is subjected to the Drug. The demographic details of that person are stored in the person table.
 DRUG_EXPOSURE,DRUG_CONCEPT_ID,NO,INTEGER,A foreign key that refers to a Standard Concept identifier in the Standardized Vocabularies for the Drug concept.
 DRUG_EXPOSURE,DRUG_EXPOSURE_START_DATE,NO,DATE,"The start date for the current instance of Drug utilization. Valid entries include a start date of a prescription, the date a prescription was filled, or the date on which a Drug administration procedure was recorded."
+DRUG_EXPOSURE,DRUG_EXPOSURE_START_DATETIME,NO,DATETIME,The start time for the current instance of Drug utilization.
 DRUG_EXPOSURE,DRUG_EXPOSURE_END_DATE,YES,DATE,The end date for the current instance of Drug utilization. It is not available from all sources.
+DRUG_EXPOSURE,DRUG_EXPOSURE_END_DATETIME,YES,DATETIME,The end time for the current instance of Drug utilization. It is not available from all sources.
 DRUG_EXPOSURE,DRUG_TYPE_CONCEPT_ID,NO,INTEGER,A foreign key to the predefined Concept identifier in the Standardized Vocabularies reflecting the type of Drug Exposure recorded. It indicates how the Drug Exposure was represented in the source data.
 DRUG_EXPOSURE,STOP_REASON,YES,CHARACTER VARYING,"The reason the Drug was stopped. Reasons include regimen completed, changed, removed, etc."
 DRUG_EXPOSURE,REFILLS,YES,INTEGER,"The number of refills after the initial prescription. The initial prescription is not counted, values start with 0."
@@ -103,7 +110,9 @@ DEVICE_EXPOSURE,DEVICE_EXPOSURE_ID,NO,INTEGER,A system-generated unique identifi
 DEVICE_EXPOSURE,PERSON_ID,NO,INTEGER,A foreign key identifier to the Person who is subjected to the Device. The demographic details of that person are stored in the Person table.
 DEVICE_EXPOSURE,DEVICE_CONCEPT_ID,NO,INTEGER,A foreign key that refers to a Standard Concept identifier in the Standardized Vocabularies for the Device concept.
 DEVICE_EXPOSURE,DEVICE_EXPOSURE_START_DATE,NO,DATE,The date the Device or supply was applied or used.
+DEVICE_EXPOSURE,DEVICE_EXPOSURE_START_DATETIME,NO,DATETIME,The time the Device or supply was applied or used.
 DEVICE_EXPOSURE,DEVICE_EXPOSURE_END_DATE,YES,DATE,The date the Device or supply was removed from use.
+DEVICE_EXPOSURE,DEVICE_EXPOSURE_END_DATETIME,YES,DATETIME,The time the Device or supply was removed from use.
 DEVICE_EXPOSURE,DEVICE_TYPE_CONCEPT_ID,NO,INTEGER,A foreign key to the predefined Concept identifier in the Standardized Vocabularies reflecting the type of Device Exposure recorded. It indicates how the Device Exposure was represented in the source data.
 DEVICE_EXPOSURE,UNIQUE_DEVICE_ID,YES,CHARACTER VARYING,A UDI or equivalent identifying the instance of the Device used in the Person.
 DEVICE_EXPOSURE,QUANTITY,YES,INTEGER,The number of individual Devices used for the exposure.
@@ -127,7 +136,7 @@ MEASUREMENT,MEASUREMENT_ID,NO,INTEGER,A unique identifier for each Measurement.
 MEASUREMENT,PERSON_ID,NO,INTEGER,A foreign key identifier to the Person about whom the measurement was recorded. The demographic details of that Person are stored in the PERSON table.
 MEASUREMENT,MEASUREMENT_CONCEPT_ID,NO,INTEGER,A foreign key to the standard measurement concept identifier in the Standardized Vocabularies.
 MEASUREMENT,MEASUREMENT_DATE,NO,DATE,The date of the Measurement.
-MEASUREMENT,MEASUREMENT_TIME,YES,CHARACTER VARYING,"The time of the Measurement. (Some database systems don't have a datatype of time. To accomodate all temporal analyses, datatype datetime can be used (combining measurement_date and measurement_time)Relevant Forum Discussion"
+MEASUREMENT,MEASUREMENT_DATETIME,YES,DATETIME,"The time of the Measurement. (Some database systems don't have a datatype of time. To accomodate all temporal analyses, datatype datetime can be used (combining measurement_date and measurement_time)Relevant Forum Discussion"
 MEASUREMENT,MEASUREMENT_TYPE_CONCEPT_ID,NO,INTEGER,A foreign key to the predefined Concept in the Standardized Vocabularies reflecting the provenance from where the Measurement record was recorded.
 MEASUREMENT,OPERATOR_CONCEPT_ID,YES,INTEGER,"A foreign key identifier to the predefined Concept in the Standardized Vocabularies reflecting the mathematical operator that is applied to the value_as_number. Operators are <, ?, =, ?, >."
 MEASUREMENT,VALUE_AS_NUMBER,YES,NUMERIC,A Measurement result where the result is expressed as a numeric value.
@@ -145,7 +154,7 @@ OBSERVATION,OBSERVATION_ID,NO,INTEGER,A unique identifier for each observation.
 OBSERVATION,PERSON_ID,NO,INTEGER,A foreign key identifier to the Person about whom the observation was recorded. The demographic details of that Person are stored in the PERSON table.
 OBSERVATION,OBSERVATION_CONCEPT_ID,NO,INTEGER,A foreign key to the standard observation concept identifier in the Standardized Vocabularies.
 OBSERVATION,OBSERVATION_DATE,NO,DATE,The date of the observation.
-OBSERVATION,OBSERVATION_TIME,YES,CHARACTER VARYING,The time of the observation.
+OBSERVATION,OBSERVATION_DATETIME,YES,DATETIME,The time of the observation.
 OBSERVATION,OBSERVATION_TYPE_CONCEPT_ID,NO,INTEGER,A foreign key to the predefined concept identifier in the Standardized Vocabularies reflecting the type of the observation.
 OBSERVATION,VALUE_AS_NUMBER,YES,NUMERIC,The observation result stored as a number. This is applicable to observations where the result is expressed as a numeric value.
 OBSERVATION,VALUE_AS_STRING,YES,CHARACTER VARYING,The observation result stored as a string. This is applicable to observations where the result is expressed as verbatim text.
@@ -161,7 +170,7 @@ OBSERVATION,QUALIFIER_SOURCE_VALUE,YES,CHARACTER VARYING,The source value associ
 NOTE,NOTE_ID,NO,INTEGER,A unique identifier for each note.
 NOTE,PERSON_ID,NO,INTEGER,A foreign key identifier to the Person about whom the Note was recorded. The demographic details of that Person are stored in the PERSON table.
 NOTE,NOTE_DATE,NO,DATE,The date the note was recorded.
-NOTE,NOTE_TIME,YES,CHARACTER VARYING,The time the note was recorded.
+NOTE,NOTE_DATETIME,YES,DATETIME,The time the note was recorded.
 NOTE,NOTE_TYPE_CONCEPT_ID,NO,INTEGER,"A foreign key to the predefined Concept in the Standardized Vocabularies reflecting the type, origin or provenance of the Note."
 NOTE,NOTE_TEXT,NO,TEXT,The content of the Note.
 NOTE,PROVIDER_ID,YES,INTEGER,A foreign key to the Provider in the PROVIDER table who took the Note.
@@ -172,7 +181,7 @@ SPECIMEN,PERSON_ID,NO,INTEGER,A foreign key identifier to the Person for whom th
 SPECIMEN,SPECIMEN_CONCEPT_ID,NO,INTEGER,A foreign key referring to a Standard Concept identifier in the Standardized Vocabularies for the Specimen.
 SPECIMEN,SPECIMEN_TYPE_CONCEPT_ID,NO,INTEGER,A foreign key referring to the Concept identifier in the Standardized Vocabularies reflecting the system of record from which the Specimen was represented in the source data.
 SPECIMEN,SPECIMEN_DATE,NO,DATE,The date the specimen was obtained from the Person.
-SPECIMEN,SPECIMEN_TIME,YES,CHARACTER VARYING,The time on the date when the Specimen was obtained from the person.
+SPECIMEN,SPECIMEN_DATETIME,YES,DATETIME,The time on the date when the Specimen was obtained from the person.
 SPECIMEN,QUANTITY,YES,NUMERIC,The amount of specimen collection from the person during the sampling procedure.
 SPECIMEN,UNIT_CONCEPT_ID,YES,INTEGER,A foreign key to a Standard Concept identifier for the Unit associated with the numeric quantity of the Specimen collection.
 SPECIMEN,ANATOMIC_SITE_CONCEPT_ID,YES,INTEGER,A foreign key to a Standard Concept identifier for the anatomic location of specimen collection.
